@@ -15,7 +15,7 @@ def create_app():
     app = Flask(__name__)
 
     # Load configuration from environment variables
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', 'postgresql://username:password@localhost/dbname')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', 'postgresql://group2_electronics_project_user:wYWHOsnDi3EgTzVU0hVb2c7Zt4Fej1wC@dpg-cqch7lmehbks738g4k80-a.frankfurt-postgres.render.com/group2_electronics_project')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize extensions
