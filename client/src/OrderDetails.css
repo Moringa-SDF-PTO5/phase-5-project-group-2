@@ -1,0 +1,15 @@
+.order-details {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .order-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .order-details li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
