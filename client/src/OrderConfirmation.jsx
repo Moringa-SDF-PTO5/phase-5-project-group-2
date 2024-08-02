@@ -11,19 +11,6 @@ const OrderConfirmation = () => {
   return (
     <div>
       <Navbar />
-      <div className="order-confirmation">
-        <h1>Your order is confirmed</h1>
-        <p>Thank you for shopping with us</p>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8JHb5VnI5kadNpwvNGxOBSuCh__5cy8q3lQ&s"  />
-        <p>Your order date will be sent to your email </p>
-        <div className="confirmation-buttons">
-          <button className="continue-shopping-button" onClick={() => navigate('/')}>Continue Shopping</button>
-        </div>
-      </div>
-      <Footer />
-  return (
-    <div>
-      <Navbar />
     <div className="order-confirmation">
       <h1>Thank You!</h1>
       <p>We are getting started on your order right away, and you will receive an order confirmation shortly via your email.</p>
@@ -34,6 +21,9 @@ const OrderConfirmation = () => {
       </div>
 
       <button className="view-order-button">VIEW ORDER CONFIRMATION</button>
+      <div className="confirmation-buttons">
+          <button className="continue-shopping-button" onClick={() => navigate('/')}>Continue Shopping</button>
+        </div>
 
     </div>
     <Footer />
