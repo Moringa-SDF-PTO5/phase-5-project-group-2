@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-from models import db, User, Staff, Product, Category, Order, OrderItem, Address, Payment
+from models import db, User, Staff, Product, Category, Order, OrderItem, Address, Payment, Purchase
 
 def create_app():
     app = Flask(__name__)
@@ -48,6 +48,57 @@ def register():
     except Exception as e:
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    return jsonify(user.to_dict())
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    return jsonify([user.to_dict() for user in users])
+
+@app.route('/users/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    data = request.json
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+
+    if 'username' in data:
+        user.username = data['username']
+    if 'password' in data:
+        user.password = data['password']
+    if 'email' in data:
+        user.email = data['email']
+    if 'role' in data:
+        user.role = data['role']
+
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': 'Integrity error occurred. Please check your input data.'}), 400
+
+    return jsonify(user.to_dict())
+
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
+    try:
+        db.session.delete(user)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': 'Integrity error occurred. Please check your input data.'}), 400
+
+    return jsonify({'message': 'User deleted successfully'})        
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -64,7 +115,8 @@ def add_staff():
         first_name=data['first_name'],
         last_name=data['last_name'],
         email=data['email'],
-        role=data.get('role')
+        role=data.get('role'),
+        staff_number=data['staff_number']
     )
     db.session.add(new_staff)
     db.session.commit()
@@ -88,6 +140,7 @@ def update_staff(staff_id):
     staff.last_name = data.get('last_name', staff.last_name)
     staff.email = data.get('email', staff.email)
     staff.role = data.get('role', staff.role)
+    staff.staff_number = data.get('staff_number', staff.staff_number) 
     db.session.commit()
     return jsonify(staff.to_dict())
 
@@ -452,6 +505,67 @@ def delete_payment(payment_id):
     db.session.delete(payment)
     db.session.commit()
     return jsonify({'message': 'Payment deleted successfully'}), 200
+
+
+@app.route('/purchases/<int:purchase_id>', methods=['GET'])
+def get_purchase(purchase_id):
+    purchase = Purchase.query.get(purchase_id)
+    if not purchase:
+        return jsonify({'error': 'Purchase not found'}), 404
+    return jsonify(purchase.to_dict())
+
+@app.route('/purchases', methods=['GET'])
+def get_purchases():
+    purchases = Purchase.query.all()
+    return jsonify([purchase.to_dict() for purchase in purchases])
+
+@app.route('/purchases/<int:purchase_id>', methods=['PUT'])
+def update_purchase(purchase_id):
+    data = request.json
+    purchase = Purchase.query.get(purchase_id)
+    if not purchase:
+        return jsonify({'error': 'Purchase not found'}), 404
+    
+    if 'order_id' in data:
+        purchase.order_id = data['order_id']
+    if 'product_id' in data:
+        product_id = data['product_id']
+        product = Product.query.get(product_id)
+        if not product:
+            return jsonify({'error': 'Product not found'}), 404
+        purchase.product_id = product_id
+        purchase.total_price = product.price * purchase.quantity
+    if 'quantity' in data:
+        purchase.quantity = data['quantity']
+        purchase.total_price = purchase.product.price * purchase.quantity
+    if 'total_price' in data:
+        purchase.total_price = data['total_price']
+
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': 'Integrity error occurred. Please check your input data.'}), 400
+
+    return jsonify(purchase.to_dict())
+
+@app.route('/purchases/<int:purchase_id>', methods=['DELETE'])
+def delete_purchase(purchase_id):
+    purchase = Purchase.query.get(purchase_id)
+    if not purchase:
+        return jsonify({'error': 'Purchase not found'}), 404
+    
+    try:
+        db.session.delete(purchase)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': 'Integrity error occurred. Please check your input data.'}), 400
+
+    return jsonify({'message': 'Purchase deleted successfully'})
+
+if __name__ == '__main__':
+    app.run(debug=True)    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)       

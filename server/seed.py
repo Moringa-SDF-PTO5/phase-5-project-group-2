@@ -1,5 +1,5 @@
 from app import app, db
-from models import User, Staff, Category, Product, Order, OrderItem, Address, Payment
+from models import User, Staff, Category, Product, Order, OrderItem, Address, Payment, Purchase
 
 def seed_database():
     with app.app_context():
@@ -17,15 +17,17 @@ def seed_database():
         db.session.commit()
         
         # Create sample staff
-        staffs= [
-            {'first_name': 'John', 'last_name': 'Doe', 'email': 'john.doe@example.com', 'role': 'Manager'},
-            {'first_name': 'Jane', 'last_name': 'Smith', 'email': 'jane.smith@example.com', 'role': 'Developer'},
-            {'first_name': 'Alice', 'last_name': 'Johnson', 'email': 'alice.johnson@example.com', 'role': 'Analyst'},
+        staffs = [
+            {'first_name': 'John', 'last_name': 'Doe', 'email': 'john.doe@example.com', 'role': 'Manager', 'staff_number': 'STF0010'},
+            {'first_name': 'Jane', 'last_name': 'Smith', 'email': 'jane.smith@example.com', 'role': 'Developer', 'staff_number': 'STF0011'},
+            {'first_name': 'Alice', 'last_name': 'Johnson', 'email': 'alice.johnson@example.com', 'role': 'Analyst', 'staff_number': 'STF0012'},
         ]
+        
         for staff_data in staffs:
             staff = Staff(**staff_data)
             db.session.add(staff)
         db.session.commit()
+       
 
         # Create sample categories
         categories = [
@@ -142,13 +144,26 @@ def seed_database():
 
         # Create sample payments
         payments = [
-            Payment(order_id=1, amount=1199.98, payment_method='Credit Card', transaction_id='tx1234567890'),
-            Payment(order_id=2, amount=499.99, payment_method='PayPal', transaction_id='tx0987654321')
+            Payment(order_id=1, amount=34000.00, payment_method='Credit Card', transaction_id='tx1234567890'),
+            Payment(order_id=2, amount=32000.00, payment_method='PayPal', transaction_id='tx0987654321')
         ]
         db.session.bulk_save_objects(payments)
         db.session.commit()
 
-        print("Database seeded with users, staff, categories, products, orders, order items, addresses, and payments.")
+
+        # Create sample purchases
+        purchases = [
+            Purchase(order_id=1, product_id=1, quantity=2, total_price=64000.00),
+            Purchase(order_id=1, product_id=2, quantity=1, total_price=45000.00),
+            Purchase(order_id=2, product_id=3, quantity=3, total_price=70000.00),
+            Purchase(order_id=2, product_id=1, quantity=1, total_price=45000.00),
+            
+        ]
+        
+        db.session.bulk_save_objects(purchases)
+        db.session.commit()        
+
+        print("Database seeded with users, staff, categories, products, orders, order items, addresses, payments and purchases")
 
 if __name__ == "__main__":
     seed_database()
