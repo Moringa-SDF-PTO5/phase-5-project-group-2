@@ -512,7 +512,29 @@ def delete_payment(payment_id):
     db.session.delete(payment)
     db.session.commit()
     return jsonify({'message': 'Payment deleted successfully'}), 200
+@app.route('/purchases', methods=['POST'])
+def create_purchase():
+    data = request.json
+    order_id = data.get('order_id')
+    product_id = data.get('product_id')
+    quantity = data.get('quantity')
+    
+    # Calculate total price based on product price and quantity
+    product = Product.query.get(product_id)
+    if not product:
+        return jsonify({'error': 'Product not found'}), 404
+    total_price = product.price * quantity
 
+    purchase = Purchase(order_id=order_id, product_id=product_id, quantity=quantity, total_price=total_price)
+
+    try:
+        db.session.add(purchase)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': 'Integrity error occurred. Please check your input data.'}), 400
+
+    return jsonify(purchase.to_dict()), 201
 
 @app.route('/purchases/<int:purchase_id>', methods=['GET'])
 def get_purchase(purchase_id):
