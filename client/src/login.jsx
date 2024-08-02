@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import techlogo from './assets/techlogo.png'
+import { AppContext } from './AppContext';
+import techlogo from './assets/techlogo.png';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useContext(AppContext); 
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -23,7 +25,7 @@ const Login = () => {
         const { username, password } = formData;
 
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            const response = await fetch('https://phase-5-project-group-2-server.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,6 +36,7 @@ const Login = () => {
             if (response.ok) {
                 const user = await response.json();
                 console.log(user); 
+                login(); 
                 navigate('/');
             } else {
                 const result = await response.json();
@@ -55,15 +58,13 @@ const Login = () => {
                 <h1 className="title">TECH HAVEN</h1>
             </div>
             <div className="login-card">
-                <h1 className="login-header">login</h1>
+                <h1 className="login-header">Login</h1>
                 {error && <p className="error">{error}</p>}
                 <form className="login-form" onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
-                        type="email"
                         id="username"
                         name="username"
-                        placeholder="example@mail.com"
                         value={formData.username}
                         onChange={handleChange}
                         required

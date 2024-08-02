@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.ordering-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.cart-items {
+    flex: 1.5;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.payment-billing {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 70px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    max-width: 250px;
+}
+
+.payment-billing h1{
+padding-bottom: 100px;
+
+
+
+}
+.payment-icon {
+    width: 24px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.cart-header, .cart-item {
+    display: grid;
+    grid-template-columns: 80px 3fr 3fr 3fr 3fr;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-header {
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.cart-item {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.item-image img {
+    width: 60px;
+    height: 60px;
+}
+
+.item-name h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.item-quantity button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.item-remove button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ff4444;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+
+.item-remove button:hover {
+    background-color: #ff0000;
+}
+
+.order-summary {
+    text-align: right; 
+    border: none; 
+    padding: 10px;
+    margin-top: 20px; 
+    font-weight: bold;
+}
+
+.order-summary p {
+    margin: 5px 0; 
+}
+
+.button-checkout {
+    width: 100%; /* Full width button */
+    padding: 15px; /* Larger button size */
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745; /* Green color */
+    color: white;
+    cursor: pointer;
+    font-size: 16px; /* Larger font size */
+    text-align: center; /* Centered text */
+}
+
+.button-checkout:hover {
+    background-color: #218838;
+}
+
+.card-details label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px; /* Smaller font size */
+}
+
+.card-details input {
+    width: 100%;
+    padding: 6px; /* Smaller padding */
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px; /* Smaller font size */
+}
+
+.expiration-cvv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.expiration-cvv input {
+    width: 48%; /* Half width for expiration date and CVV */
+}
+
+h2, h3 {
+    font-weight: 600; 
+}
