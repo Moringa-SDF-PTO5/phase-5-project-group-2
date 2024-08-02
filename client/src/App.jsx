@@ -8,6 +8,10 @@ import DeliveryConfirmation from './DeliveryConfirmation';
 import Login from './login';
 import HomePage from './HomePage';
 import CategoryPage from './CategoryPage';
+import AdminDashboard from './adminPages/home';
+import SearchUser from './adminPages/search';
+import Staff from './adminPages/staff';
+import ViewAll from './adminPages/viewall';
 import OrderingPage from './OrderingPage';
 import './App.css';
 
@@ -24,6 +28,10 @@ function App() {
                         <Route path="/confirmation" element={<OrderConfirmation />} />
                         <Route path="/delivery-confirmation" element={<DeliveryConfirmation />} />
                         <Route path="/ordering" element={<OrderingPage />} />
+                        <Route path="/dashboard" element={<AdminDashboard />} />
+                        <Route path="/staff" element={<Staff />} />
+                        <Route path="/search" element={<SearchUser />} />
+                        <Route path="/view-all" element={<ViewAll />} />
                     </Routes>
                 </div>
             </AppProvider>
