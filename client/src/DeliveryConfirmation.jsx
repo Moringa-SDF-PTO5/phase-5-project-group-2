@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import './DeliveryConfirmation.css';
+import Navbar from './NavBar';
+import Footer from './footer';
+// import './DeliveryConfirmation.css';
 
 const DeliveryConfirmation = () => {
   const [orderItems, setOrderItems] = useState([]);
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch('http://localhost:5000/api/order_items') // Ensure this URL matches your Flask backend URL
+=======
+    fetch('http://localhost:5000/api/products') 
+>>>>>>> e66ba8c929c93b78251d1a4a5b82b0dfd0dd6d9c
       .then(response => response.json())
       .then(data => setOrderItems(data))
       .catch(error => console.error('Error fetching order items:', error));
   }, []);
 
   return (
+    <div>
+    <Navbar />
     <div className="delivery-confirmation">
       <h1>Delivery Confirmation</h1>
       <div className="products">
@@ -26,17 +34,8 @@ const DeliveryConfirmation = () => {
           </div>
         ))}
       </div>
-      <footer className="footer">
-        <div className="contact-info">
-          <h3>Contact</h3>
-          <p>+2547123456789</p>
-        </div>
-        <div className="address">
-          <h3>Physical Address</h3>
-          <p>Luthuli Street, Nairobi</p>
-          <p>TECH HAVEN</p>
-        </div>
-      </footer>
+    </div>
+    <Footer />
     </div>
   );
 };
