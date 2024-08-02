@@ -1,64 +1,90 @@
-# seed.py
-from app import create_app
-from models import db, User, Product, Category, Order, OrderItem, Address, Payment
+from app import app, db
+from models import User, Staff, Category, Product, Order, OrderItem, Address, Payment
 
-app = create_app()
+def seed_database():
+    with app.app_context():
+        # Clear existing data
+        db.drop_all()
+        db.create_all()
 
-# Initialize the database and create tables
-with app.app_context():
-    db.drop_all()  # Drops all tables, useful if you want a clean start
-    db.create_all()  # Creates all tables
+        # Create sample users
+        users = [
+            User(username='admin', password='adminpassword', email='admin@example.com', role='admin'),
+            User(username='customer1', password='customerpassword', email='customer1@example.com', role='customer'),
+            User(username='customer2', password='customerpassword', email='customer2@example.com', role='customer')
+        ]
+        db.session.bulk_save_objects(users)
+        db.session.commit()
+        
+        # Create sample staff
+        staffs= [
+            {'first_name': 'John', 'last_name': 'Doe', 'email': 'john.doe@example.com', 'role': 'Manager'},
+            {'first_name': 'Jane', 'last_name': 'Smith', 'email': 'jane.smith@example.com', 'role': 'Developer'},
+            {'first_name': 'Alice', 'last_name': 'Johnson', 'email': 'alice.johnson@example.com', 'role': 'Analyst'},
+        ]
+        for staff_data in staffs:
+            staff = Staff(**staff_data)
+            db.session.add(staff)
+        db.session.commit()
 
-    # Create sample data
+        # Create sample categories
+        categories = [
+            Category(category_name='Tablets', description='Versatile tablets for work and play.'),
+            Category(category_name='Headphones', description='Top quality headphones for the best sound experience.'),
+            Category(category_name='Cameras', description='High-resolution cameras for photography enthusiasts.'),
+            Category(category_name='Laptops', description='High-performance laptops for all needs.'),
+            Category(category_name='Smartphones', description='Latest smartphones with cutting-edge technology.'),
+            Category(category_name='Home Appliances', description='Various home appliances for everyday use.')
+        ]
+        db.session.bulk_save_objects(categories)
+        db.session.commit()
 
-    # Users
-    user1 = User(username='john_doe', email='john@example.com', role='customer')
-    user1.set_password('password123')  # Set hashed password
+        # Create sample products
+        products = [
+            Product(name='Tablet Z3', image='https://m.media-amazon.com/images/I/51gj5oQXbnL._AC_UY327_FMwebp_QL65_.jpg', description='A versatile tablet for productivity and entertainment.', price=49009.99, category_id=1,  stock_quantity=75),
+            Product(name='Headphones A4', image='https://m.media-amazon.com/images/I/61O7S27O+jL._AC_UY327_FMwebp_QL65_.jpg', description='Noise-cancelling headphones for a superior listening experience.', price=19900.99, category_id=2, stock_quantity=150),
+            Product(name='Camera B5', image='https://m.media-amazon.com/images/I/713rZRWpnPL._AC_UY327_FMwebp_QL65_.jpg', description='A high-resolution camera for capturing stunning photos.', price=119009.99, category_id=3, stock_quantity=30),
+            Product(name='HP Laptop', image='https://m.media-amazon.com/images/I/71CDSpds6jL._AC_UY327_FMwebp_QL65_.jpg', description='A powerful laptop with high-speed performance.', price=99009.99, category_id=4,  stock_quantity=50),
+            Product(name='Moto G Smartphone', image='https://m.media-amazon.com/images/I/61K1Fz5LxvL._AC_UY327_FMwebp_QL65_.jpg', description='A sleek smartphone with the latest features.', price=79900.99, category_id=5, stock_quantity=100),
+            Product(name='Amazon Fire TV', image='https://m.media-amazon.com/images/I/71Nma1KADeL._AC_UY327_FMwebp_QL65_.jpg', description='High-resolution smart TV.', price=1009.99, category_id=6, stock_quantity=50)
+        ]
+        db.session.bulk_save_objects(products)
+        db.session.commit()
 
-    user2 = User(username='jane_smith', email='jane@example.com', role='customer')
-    user2.set_password('securepass456')
+        # Create sample orders
+        orders = [
+            Order(user_id=2, total_amount=1299.98, status='completed'),
+            Order(user_id=3, total_amount=499.99, status='pending')
+        ]
+        db.session.bulk_save_objects(orders)
+        db.session.commit()
 
-    # Categories
-    category1 = Category(name='Electronics', description='Gadgets and devices')
-    category2 = Category(name='Clothing', description='Apparel and accessories')
+        # Create sample order items
+        order_items = [
+            OrderItem(order_id=1, product_id=1, quantity=1, price=999.99),
+            OrderItem(order_id=1, product_id=2, quantity=1, price=199.99),
+            OrderItem(order_id=2, product_id=3, quantity=1, price=499.99)
+        ]
+        db.session.bulk_save_objects(order_items)
+        db.session.commit()
 
-    # Products
-    product1 = Product(name='Laptop', image='laptop.jpg', description='High-performance laptop', price=999.99, category=category1, stock_quantity=10)
-    product2 = Product(name='Smartphone', image='smartphone.jpg', description='Latest model smartphone', price=699.99, category=category1, stock_quantity=25)
-    product3 = Product(name='T-Shirt', image='tshirt.jpg', description='Comfortable cotton t-shirt', price=19.99, category=category2, stock_quantity=50)
+        # Create sample addresses
+        addresses = [
+            Address(user_id=2, street='123 Main St', city='Anytown', state='CA', postal_code='12345', country='USA'),
+            Address(user_id=3, street='456 Elm St', city='Othertown', state='TX', postal_code='67890', country='USA')
+        ]
+        db.session.bulk_save_objects(addresses)
+        db.session.commit()
 
-    # Orders
-    order1 = Order(user=user1, total_amount=1719.97, status='pending')
+        # Create sample payments
+        payments = [
+            Payment(order_id=1, amount=1199.98, payment_method='Credit Card', transaction_id='tx1234567890'),
+            Payment(order_id=2, amount=499.99, payment_method='PayPal', transaction_id='tx0987654321')
+        ]
+        db.session.bulk_save_objects(payments)
+        db.session.commit()
 
-    # Order Items
-    order_item1 = OrderItem(order=order1, product=product1, quantity=1, price=999.99)
-    order_item2 = OrderItem(order=order1, product=product2, quantity=1, price=699.99)
-    order_item3 = OrderItem(order=order1, product=product3, quantity=1, price=19.99)
+        print("Database seeded with users, staff, categories, products, orders, order items, addresses, and payments.")
 
-    # Addresses
-    address1 = Address(user=user1, street='123 Main St', city='Metropolis', state='CA', postal_code='12345', country='USA')
-    address2 = Address(user=user2, street='456 Elm St', city='Gotham', state='NY', postal_code='67890', country='USA')
-
-    # Payments
-    payment1 = Payment(order=order1, amount=1719.97, payment_method='Credit Card', transaction_id='TX123456789')
-
-    # Add instances to the session
-    db.session.add(user1)
-    db.session.add(user2)
-    db.session.add(category1)
-    db.session.add(category2)
-    db.session.add(product1)
-    db.session.add(product2)
-    db.session.add(product3)
-    db.session.add(order1)
-    db.session.add(order_item1)
-    db.session.add(order_item2)
-    db.session.add(order_item3)
-    db.session.add(address1)
-    db.session.add(address2)
-    db.session.add(payment1)
-
-    # Commit the session
-    db.session.commit()
-
-    print("Database seeded successfully!")
+if __name__ == "__main__":
+    seed_database()
