@@ -15,7 +15,7 @@ const ViewAll = () => {
   }, []);
 
   const handleDelete = (userId) => {
-    fetch(`https://phase-5-project-group-2-server.onrender.com/staffs/${userId}`, {
+    fetch(`https://phase-5-project-group-2-server.onrender.com/staffs/${staff_id}`, {
       method: 'DELETE',
     })
       .then(response => {

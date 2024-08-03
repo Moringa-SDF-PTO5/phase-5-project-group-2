@@ -20,7 +20,7 @@ const OrderConfirmation = () => {
         <p>Delivery pending</p>
       </div>
 
-      <button className="view-order-button">VIEW ORDER CONFIRMATION</button>
+      <button className="view-order-button" onClick={() => navigate('/confirmation')}>VIEW ORDER CONFIRMATION</button>
       <div className="confirmation-buttons">
           <button className="continue-shopping-button" onClick={() => navigate('/')}>Continue Shopping</button>
         </div>
