@@ -1,15 +1,28 @@
 .order-details {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .order-details ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .order-details li {
-    margin: 10px 0;
-    font-size: 18px;
-  }
-  
+  padding: 20px;
+}
+
+.order-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.order-details-table th, .order-details-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.order-details-table th {
+  background-color: #f2f2f2;
+}
+
+.order-details-table img {
+  max-width: 100px;
+}
+
+.order-summary {
+  margin-top: 20px;
+  font-size: 1.2em;
+}

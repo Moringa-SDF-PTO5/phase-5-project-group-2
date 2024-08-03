@@ -29,7 +29,10 @@ const Navbar = () => {
   };
 
   const cartItemCount = cartItems.reduce((count, item) => count + item.quantity, 0);
-
+  const handleMyOrdersClick = () => {
+    navigate('/order-details');
+    setShowProfileOptions(false);
+  };
   return (
     <nav className="navbar">
       <div className='title'>
@@ -50,7 +53,7 @@ const Navbar = () => {
             <div className="profile-options">
               {isLoggedIn ? (
                 <>
-                  <div className="option">My Orders</div>
+                  <div className="option" onClick={handleMyOrdersClick}>My Orders</div>
                   <div className="option" onClick={handleLogout}>Log out</div>
                 </>
               ) : (
