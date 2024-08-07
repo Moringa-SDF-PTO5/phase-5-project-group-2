@@ -27,8 +27,8 @@ Frontend:
     3. CSS
 
 Deployment:
-    1. Render 
-    2. Vercel
+    1. Render- https://phase-5-project-group-2.onrender.com
+    2. Vercel- https://phase-5-project-group-2.vercel.app/
 
 ## Installation
 ### Clone the repository:
