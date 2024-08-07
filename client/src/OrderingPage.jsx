@@ -25,7 +25,7 @@ const OrderingPage = () => {
 
     const handleCheckout = () => {
         alert('Checkout Successful!');
-        clearCart();
+        
         navigate('/confirmation'); // Replace with your confirmation route
     };
 
