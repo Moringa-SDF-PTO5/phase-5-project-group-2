@@ -5,6 +5,7 @@ import CreateAccount from './register';
 import { AppProvider } from './AppContext';
 import OrderConfirmation from './OrderConfirmation';
 import DeliveryConfirmation from './DeliveryConfirmation';
+import OrderDetails from './OrderDetails';
 import Login from './login';
 import HomePage from './HomePage';
 import CategoryPage from './CategoryPage';
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/category/:categoryName" element={<CategoryPage />} />
                         <Route path="/confirmation" element={<OrderConfirmation />} />
                         <Route path="/delivery-confirmation" element={<DeliveryConfirmation />} />
+                        <Route path="/order-details" element={<OrderDetails />} />
                         <Route path="/ordering" element={<OrderingPage />} />
                         <Route path="/dashboard" element={<AdminDashboard />} />
                         <Route path="/staff" element={<Staff />} />
