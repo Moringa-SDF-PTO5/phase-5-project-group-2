@@ -281,12 +281,6 @@ def delete_product(product_id):
     db.session.commit()
     return jsonify({'message': 'Product deleted successfully'}), 200
 
-@app.route('/cart', methods=['GET'])
-def get_cart():
-    user_id = request.args.get('user_id')
-    cart_items = OrderItem.query.filter_by(user_id=user_id).all()
-    return jsonify([item.to_dict() for item in cart_items]), 200
-
 
 # Order endpoints
 @app.route('/orders', methods=['GET'])
