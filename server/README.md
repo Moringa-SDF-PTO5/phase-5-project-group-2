@@ -1,4 +1,4 @@
-# Tech Haven Booking
+# Tech Haven
 
 ## Description
 
