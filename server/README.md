@@ -2,7 +2,7 @@
 
 ## Description
 
-Tech Haven is a web application designed to enhance electronic gadgets selling through e-commerce. It includes functionalities for user registration, login, ordering and making purchases and payment. The backend of the application is built using Flask, a lightweight Python web framework, and it utilizes PostgreSQL as its database.
+Tech Haven is a web application designed to enhance electronic gadgets selling through e-commerce. It includes functionalities for user registration, login, ordering and making purchases and payment. The server also has provision for addresses, and staffs. The backend of the application is built using Flask, a lightweight Python web framework, and it utilizes PostgreSQL as its database.
 
 ## Features
 
