@@ -6,8 +6,7 @@ Tech Haven is a web application designed to enhance electronic gadgets selling t
 
 ## Features
 
-Backend Url: <https://phase-5-project-group-2-server.onrender.com/>
-Base Url: https://phase-5-project-group-2-gmo8.onrender.com/
+ Backend Url: <https://phase-5-project-group-2-server.onrender.com/>
 
 * User Registration and Login: customers can register and login.
 * Ordering: customer can view the product, make an order, delete order.
@@ -96,20 +95,25 @@ Backend Url: <https://phase-5-project-group-2-server.onrender.com/>
 
 GET all users list
 <https://phase-5-project-group-2-server.onrender.com/users>
-![image](c:\Users\ADMIN\OneDrive\Pictures\Camera Roll\Capture.PNG)
+![image](https://github.com/user-attachments/assets/c9f055fb-021b-4ce8-b960-646d7735f46f)
+
 
 GET a single order_item
 <https://phase-5-project-group-2-server.onrender.com/order_items/1>
-![image]()
+![image](https://github.com/user-attachments/assets/0757d69b-1908-4a26-9881-c990d5fbb02f)
+
 
 GET all products
 <https://hase-5-project-group-2-server.onrender.com/products>
-![image](https://github.com/NabilNagib/1/assets/143793953/14e8beb4-4f24-4b38-9306-b97d62244717)
+![image](https://github.com/user-attachments/assets/37093aee-ca3a-4a46-a854-bf24da75344b)
+
 
 #### POST a purchases
 <https://hase-5-project-group-2-server.onrender.com/purchases>
 Ensure the body structure is as below
-![image](https://github.com/NabilNagib/1/assets/143793953/4e79d37d-f3de-4dac-b78a-dc470d5707c3)
+![image](https://github.com/user-attachments/assets/51fea25a-0cd3-43aa-8682-3ea7858d2a27)
+
+
 
 ### User Authentication
 
